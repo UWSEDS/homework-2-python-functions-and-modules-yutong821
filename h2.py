@@ -13,6 +13,8 @@ def read(url):
 
 def test_create_dateframe(df, columnsName):
     df_col = list(df.columns)
+    # print(df.columns.dtype == 'object')
+
 
     if df_col == columnsName:
         condition_1 = 1
@@ -20,10 +22,16 @@ def test_create_dateframe(df, columnsName):
         condition_1 = 0
 
     for i in df_col:
-        if df[i].dtype:
-            condition_2 = 1
-        else:
-            condition_2 = 0
+        df_col = list(df.columns)
+        for i in df_col:
+            l = []
+            for j in df[i]:
+                l.append(type(j))
+            for i in l:
+                if i != l[0]:
+                    condition_2 = 0
+                else:
+                    condition_2 = 1
 
 
     numOfRows = df.count(axis='rows')
@@ -40,7 +48,7 @@ def test_create_dateframe(df, columnsName):
         print('False')
         return False
 
-url= 'https://inventory.data.gov/dataset/9b8df339-a659-4f7a-b6f0-de8e17964f68/resource/583cf78f-2508-4d21-a55d-3e3cb1dfff16/download/userssharedsdfteachingamericanhistory2010applicants.csv'
-df = read(url)
-columnsName = ['Project Title', 'City', 'State', 'ZIP', 'Award', 'Location']
-test_create_dateframe(df, columnsName)
+# url= 'https://inventory.data.gov/dataset/9b8df339-a659-4f7a-b6f0-de8e17964f68/resource/583cf78f-2508-4d21-a55d-3e3cb1dfff16/download/userssharedsdfteachingamericanhistory2010applicants.csv'
+# df = read(url)
+# columnsName = ['Project Title', 'City', 'a', 'ZIP', 'Award', 'Location']
+# test_create_dateframe(df, columnsName)
